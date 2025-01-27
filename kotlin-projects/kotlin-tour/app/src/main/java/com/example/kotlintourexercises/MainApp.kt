@@ -5,4 +5,8 @@ fun main() {
     printVariables()
     printStringTemp()
     printHelloWorldExercise()
+
+    printInferredTypes()
+    printDeclaredTypes()
+    displayBasicTypesExercise()
 } // end main()
