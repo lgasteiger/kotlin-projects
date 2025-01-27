@@ -9,4 +9,9 @@ fun main() {
     printInferredTypes()
     printDeclaredTypes()
     displayBasicTypesExercise()
+
+    printListExercises()
+    printCastingExercise()
+    printEdgeElements()
+    printListSize()
 } // end main()
