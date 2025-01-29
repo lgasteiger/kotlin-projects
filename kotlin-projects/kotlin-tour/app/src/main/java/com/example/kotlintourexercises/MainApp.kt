@@ -14,4 +14,8 @@ fun main() {
     printCastingExercise()
     printEdgeElements()
     printListSize()
+    isVehicleExists()
+    addFarmCrops()
+    delFarmEquip()
+    printSetExercises()
 } // end main()

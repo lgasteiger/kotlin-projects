@@ -67,3 +67,78 @@ fun printListSize() {
     val readOnlyProgLang = listOf("kotlin", "javascript", "rust", "python")
     println("the size of the list is ${readOnlyProgLang.count()}")
 } // end printListSize()
+
+/**
+ * prints true to standard output if a vehicle exists in the list. otherwise, prints
+ * false
+ *
+ * @param none
+ * @return none
+ * @throws none
+ * @see none
+ */
+fun isVehicleExists() {
+    println("**********is vehicle exists exercise**********")
+    val readOnlyElecVehicles = listOf("tesla 3-series", "hyundai ioniq", "ford mach-e",
+        "bmw i30")
+    val isExistsElectric = if ("tesla 3-series" in readOnlyElecVehicles) true else false
+    println("the 'tesla 3-series' exists is $isExistsElectric")
+
+    val isExistsPetrol = if ("ford mustang v8" in readOnlyElecVehicles) true else false
+    println("the 'ford mustang v8' exists is $isExistsPetrol")
+} // end isVehicleExists()
+
+/**
+ * adds farm crops and prints the updated list to the standard output
+ */
+fun addFarmCrops() {
+    println("**********add farm crops exercise**********")
+    val farmCrops: MutableList<String> = mutableListOf("corn", "peas", "beans",)
+    farmCrops.add("carrots")
+
+    //println(farmCrops)
+    farmCrops.forEachIndexed { index, crop ->
+        println("${index + 1}. $crop")
+    } // end forEachIndexed
+} // end addFarmCrops()
+
+/**
+ * deletes farm equipment and prints the updated list to the standard output
+ *
+ * @param none
+ * @return none
+ * @throws none
+ * @see none
+ */
+fun delFarmEquip() {
+    println("**********delete farm equipment exercise**********")
+    val farmEquipment: MutableList<String> = mutableListOf("shovel", "hoe", "water filter",
+        "tractor",)
+    farmEquipment.remove("shovel")
+
+    farmEquipment.forEachIndexed { index, equip ->
+        println("${index + 1}. $equip")
+    } // end forEachIndexed
+} // end delFarmEquip()
+
+/**
+ * prints read only unique agencies to the standard output
+ *
+ * @param none
+ * @return none
+ * @throws none
+ * @see none
+ */
+fun printSetExercises() {
+    println("**********read only unique agencies exercise**********")
+    val readOnlyGovAgencies = setOf("cbp", "cia", "nsa", "fbi", "cbp", "fbi")
+    readOnlyGovAgencies.forEachIndexed { index, agency ->
+        println("${index + 1}. $agency")
+    } // end forEachIndexed
+
+    val superheroes: MutableSet<String> = mutableSetOf("superman", "batman", "wonder woman",
+        "flash", "batman", "robin", "robin")
+    superheroes.forEachIndexed { index, hero ->
+        println("${index + 1}. $hero")
+    } // end forEachIndexed
+} // end printSetExercises()
