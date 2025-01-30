@@ -10,12 +10,5 @@ fun main() {
     printDeclaredTypes()
     displayBasicTypesExercise()
 
-    printListExercises()
-    printCastingExercise()
-    printEdgeElements()
-    printListSize()
-    isVehicleExists()
-    addFarmCrops()
-    delFarmEquip()
-    printSetExercises()
+   processCollectionExercises()
 } // end main()
