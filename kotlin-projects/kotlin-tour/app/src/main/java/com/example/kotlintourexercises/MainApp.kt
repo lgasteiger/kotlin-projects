@@ -1,14 +1,14 @@
 package com.example.kotlintourexercises
 
 fun main() {
-    printHelloWorld()
-    printVariables()
-    printStringTemp()
-    printHelloWorldExercise()
+    // printHelloWorld()
+    // printVariables()
+    // printStringTemp()
+    // printHelloWorldExercise()
 
-    printInferredTypes()
-    printDeclaredTypes()
-    displayBasicTypesExercise()
+    // printInferredTypes()
+    // printDeclaredTypes()
+    // displayBasicTypesExercise()
 
    processCollectionExercises()
 } // end main()

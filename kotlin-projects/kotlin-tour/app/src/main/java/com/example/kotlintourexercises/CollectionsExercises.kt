@@ -1,19 +1,33 @@
 package com.example.kotlintourexercises
 
 /**
- * prints collection, (e.g. lists, sets, maps, etc.) elements to standard output
+ * prints collection of lists, sets elements to standard output
  *
  * @param items the collection of elements to print
  * @return none
  * @throws none
  * @see none
  */
-fun printElements(items: Collection<String>) {
-    println("+++++prints elements in the collection exercise+++++")
-    items.forEachIndexed { index, item ->
-        println("${index + 1}. $item")
-    } // end forEachIndexed
-}// end printElements(item: Collection<T>)
+fun printListsSetsElem(collection: Collection<*>) {
+    println("+++++prints elements in any list or set collection+++++")
+    when (collection) {
+        is List<*> -> {
+            collection.forEachIndexed { index, item ->
+                println("${index + 1}. $item")
+            }
+        }
+        is Set<*> -> {
+            collection.forEachIndexed { index, item ->
+                println("${index + 1}. $item")
+            } // end forEachIndexed
+        }
+        else -> {
+            println("unsupported collection type: $collection::class.simpleName")
+        }
+    } // end when (collection)
+} // end printListsSetsElem(collection: Collection<String>)
+
+// TODO: create printMapElements(Map<*, *>)
 
 /**
  * prints inferred immutable list exercise to the standard output
@@ -26,7 +40,7 @@ fun printElements(items: Collection<String>) {
 fun printInferredImmutableList() {
     println("**********inferred immutable list exercise**********")
     val readOnlyShapes = listOf("triangle", "square", "circle")
-    printElements(readOnlyShapes)
+    // printCollectionElem(readOnlyShapes)
 } // end printInferredImmutableList()
 
 /**
@@ -41,7 +55,7 @@ fun printDeclaredMutableList() {
     println("**********declared mutable list exercise**********")
     val mutableStreamingShows: MutableList<String> = mutableListOf("castlevania noctural",
         "creature commandos", "friendly neighborhood spider-man")
-    printElements(mutableStreamingShows)
+    // printCollectionElem(mutableStreamingShows)
 } // end printDeclaredMutableList()
 
 /**
@@ -52,12 +66,22 @@ fun printDeclaredMutableList() {
  * @throws none
  * @see none
  */
-fun printListCastingExercise() {
-    println("**********print list casting exercises**********")
-    val myToolBox: MutableList<String> = mutableListOf("hammer", "electric wire", "gloves")
-    val toolBoxLocked: List<String> = myToolBox
-    println("the second tool in the toolbox is '${toolBoxLocked[1]}'")
-} // end printListCastingExercise()
+// fun castImmutableCollection(collection: Any) {
+//    println("**********return mutable collection version**********")
+//    when (collection) {
+//        is List<*> -> {
+//            return collection.toMutableList()
+//        }
+//        is Set<*> -> {
+//            return collection.toMutableSet()
+//        }
+//        is Map<*, *> -> {
+//            return collection.toMutableMap()
+//        }
+//        else -> {
+//            println("unsupported collection type: $collection::class.simpleName")
+//    } // end when (collection)
+// } // end printListCastingExercise()
 
 /**
  * prints edge (first and last) elements to the standard output
@@ -82,11 +106,23 @@ fun printListEdgeElements() {
  * @throws none
  * @see none
  */
-fun printListSize() {
-    println("**********print list size exercise**********")
-    val readOnlyProgLang = listOf("kotlin", "javascript", "rust", "python")
-    println("the size of the list is ${readOnlyProgLang.count()}")
-} // end printListSize()
+//fun printCollectionSize(collection: Any) {
+//    println("**********print collection list, set, or map size exercise**********")
+//    when (collection) {
+//        is List<*> -> {
+//            println("the size of the list is ${collection.count()}")
+//        }
+//        is Set<*> -> {
+//            println("the size of the set is ${collection.count()}")
+//        }
+//        is Map<*, *> -> {
+//            println("the size of the map is ${collection.count()}")
+//        }
+//        else -> {
+//            println("unsupported collection type: $collection::class.simpleName")
+//        }
+//    } // end when (collection)
+// } // end printListSize()
 
 /**
  * prints true to standard output if a vehicle exists in the list. otherwise, prints
@@ -114,8 +150,11 @@ fun isVehicleExists() {
 fun addFarmCrops() {
     println("**********add farm crops exercise**********")
     val farmCrops: MutableList<String> = mutableListOf("corn", "peas", "beans",)
+    println("^^^^^the farm crops list before addition:^^^^^")
+    // printCollectionElem(farmCrops)
     farmCrops.add("carrots")
-    printElements(farmCrops)
+    println("^^^^^the farm crops list after addition of 'carrots' element^^^^^")
+    // printCollectionElem(farmCrops)
 } // end addFarmCrops()
 
 /**
@@ -130,8 +169,11 @@ fun delFarmEquip() {
     println("**********delete farm equipment exercise**********")
     val farmEquipment: MutableList<String> = mutableListOf("shovel", "hoe", "water filter",
         "tractor",)
+    println("-----the farm equipment list before deletion-----")
+    // printCollectionElem(farmEquipment)
     farmEquipment.remove("shovel")
-    printElements(farmEquipment)
+    println("-----the farm equipment list after deletion of 'shovel' element-----")
+    // printCollectionElem(farmEquipment)
 } // end delFarmEquip()
 
 /**
@@ -145,7 +187,7 @@ fun delFarmEquip() {
 fun printImmutableSetExercise() {
     println("**********print read only set exercise**********")
     val readOnlyGovAgencies = setOf("cbp", "cia", "nsa", "fbi", "cbp", "fbi")
-    printElements(readOnlyGovAgencies)
+    // printCollectionElem(readOnlyGovAgencies)
 } // end printImmutableSetExercise()
 
 /**
@@ -160,7 +202,7 @@ fun printMutableSetExercise() {
     println("**********print mutable set exercise*******")
     val superheroes: MutableSet<String> = mutableSetOf("superman", "batman", "wonder woman",
         "flash", "batman", "robin", "robin")
-    printElements(superheroes)
+    // printCollectionElem(superheroes)
 } // end printSetExercises()
 
 /**
@@ -188,7 +230,7 @@ fun addNewShipType(newShipType: String, navalShipTypes: MutableList<String>) {
     println("**********add new naval ship type exercise**********")
     if (newShipType !in navalShipTypes) {
         navalShipTypes.add(newShipType)
-        printElements(navalShipTypes)
+        // printElements(navalShipTypes)
     } // end if
 } // end addNewShipType(newShipName: String, navalShipTypes: MutableList<String>)
 
@@ -196,9 +238,21 @@ fun delShipType(existingShipType: String, navalShipTypes: MutableList<String>) {
     println("**********delete naval ship type exercise**********")
     if (existingShipType in navalShipTypes) {
         navalShipTypes.remove(existingShipType)
-        printElements(navalShipTypes)
+        // printElements(navalShipTypes)
     } // end if
 } // end delShipType(existingShipType: String)
+
+/**
+ * prints an immutable map to standard output
+ */
+fun printImmutableMapExercise() {
+    println("**********print immutable map exercise**********")
+    val readOnlySpacecraft = mapOf("starship" to "musk, elon", "blue origin" to "bezos, jeff",
+        "star trek" to "shatner, william")
+    readOnlySpacecraft.forEach { (key, value) ->
+        println("key: $key - value: $value")
+    } // end forEach
+} // end printImmutableMapExercise()
 
 /**
  * is the driver for processing all the collection exercises
@@ -210,25 +264,35 @@ fun delShipType(existingShipType: String, navalShipTypes: MutableList<String>) {
  */
 fun processCollectionExercises() {
     // list collection exercises
-    printInferredImmutableList()
-    printDeclaredMutableList()
-    printListCastingExercise()
-    printListEdgeElements()
-    printListSize()
-    isVehicleExists()
-    addFarmCrops()
-    delFarmEquip()
+    val readOnlyLanguages = listOf("tagalog", "deutsch", "norwegian", "english")
+    printListsSetsElem(readOnlyLanguages)
+    val mercurialLanguages: MutableList<String> = readOnlyLanguages.toMutableList()
+    mercurialLanguages.add("spanish")
+    printListsSetsElem(mercurialLanguages)
+
+    // printInferredImmutableList()
+    // printDeclaredMutableList()
+    // printListCastingExercise()
+    // printListEdgeElements()
+    // print
+    // isVehicleExists()
+    // addFarmCrops()
+    // delFarmEquip()
 
     // set collection exercises
-    printImmutableSetExercise()
-    printMutableSetExercise()
-    getAircraftCount()
+    // printImmutableSetExercise()
+    // printMutableSetExercise()
+    // getAircraftCount()
 
-    val navalShipTypes: MutableList<String> = mutableListOf("supply ship", "aircraft carrier",
-        "battleship", "cutter",)
-    addNewShipType("reconnaissance", navalShipTypes)
-    delShipType("aircraft carrier", navalShipTypes)
+    // val navalShipTypes: MutableList<String> = mutableListOf("supply ship", "aircraft carrier",
+    //    "battleship", "cutter",)
+    // addNewShipType("reconnaissance", navalShipTypes)
+    // delShipType("aircraft carrier", navalShipTypes)
 
     // map collection exercises
-    
+
+    /**
+     * TODO: add prompt to return specific element to standard output
+     * println("the second tool in the toolbox is '${toolBoxLocked[1]}'")
+     */
 } // end processCollectionExercises()
