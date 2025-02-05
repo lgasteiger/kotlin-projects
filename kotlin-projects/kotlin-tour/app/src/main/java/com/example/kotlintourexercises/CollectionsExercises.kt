@@ -3,7 +3,7 @@ package com.example.kotlintourexercises
 /**
  * prints collection of lists, sets elements to standard output
  *
- * @param items the collection of elements to print
+ * @param collection the collection of elements to print
  * @return none
  * @throws none
  * @see none
@@ -27,75 +27,62 @@ fun printListsSetsElem(collection: Collection<*>) {
     } // end when (collection)
 } // end printListsSetsElem(collection: Collection<String>)
 
-// TODO: create printMapElements(Map<*, *>)
-
 /**
- * prints inferred immutable list exercise to the standard output
+ * prints elements in any map collection
  *
- * @param none
+ * @param collection the collection of elements to print
  * @return none
  * @throws none
  * @see none
  */
-fun printInferredImmutableList() {
-    println("**********inferred immutable list exercise**********")
-    val readOnlyShapes = listOf("triangle", "square", "circle")
-    // printCollectionElem(readOnlyShapes)
-} // end printInferredImmutableList()
-
-/**
- * prints declared mutable list exercise to the standard output
- *
- * @param none
- * @return none
- * @throws none
- * @see none
- */
-fun printDeclaredMutableList() {
-    println("**********declared mutable list exercise**********")
-    val mutableStreamingShows: MutableList<String> = mutableListOf("castlevania noctural",
-        "creature commandos", "friendly neighborhood spider-man")
-    // printCollectionElem(mutableStreamingShows)
-} // end printDeclaredMutableList()
+fun printMapElements(collection: Map<*, *>) {
+    println("+++++prints elements in any map collection+++++")
+    collection.forEach { (key, value) ->
+        println("key: $key, value: $value")
+    } // end forEach
+} // end printMapElements(collection: Map<*, *>)
 
 /**
  * prints casting exercises to the standard output
  *
- * @param none
- * @return none
+ * @param collection the collection of elements to print
+ * @return immutable list or set collection
  * @throws none
  * @see none
  */
-// fun castImmutableCollection(collection: Any) {
-//    println("**********return mutable collection version**********")
-//    when (collection) {
-//        is List<*> -> {
-//            return collection.toMutableList()
-//        }
-//        is Set<*> -> {
-//            return collection.toMutableSet()
-//        }
+fun castImmutableListsSetsColl(collection: Collection<*>): Collection<*> {
+    println("**********return immutable collection version**********")
+    when (collection) {
+        is List<*> -> {
+            val listLocked: List<*> = collection
+            return listLocked
+        }
+        is Set<*> -> {
+            val setLocked: Set<*> = collection
+            return setLocked
+        }
 //        is Map<*, *> -> {
 //            return collection.toMutableMap()
 //        }
-//        else -> {
-//            println("unsupported collection type: $collection::class.simpleName")
-//    } // end when (collection)
-// } // end printListCastingExercise()
+        else -> {
+            println("unsupported collection type: $collection::class.simpleName")
+            return collection
+        } // end is...else
+    } // end when (collection)
+} // end castImmutableListsSetsColl()
 
 /**
- * prints edge (first and last) elements to the standard output
+ * prints edge (first and last) collection elements to the standard output
  *
- * @param none
+ * @param collection the collection of elements to print
  * @return none
  * @throws none
  * @see none
  */
-fun printListEdgeElements() {
-    println("**********print edge (first and last) elements exercise**********")
-    val readOnlyLanguages = listOf("tagalog", "deutch", "norwegian", "english")
-    println("the first language is '${readOnlyLanguages.first()}'")
-    println("the last language is '${readOnlyLanguages.last()}'")
+fun printListEdgeElements(collection: Collection<*>) {
+    println("**********prints edge (first and last) collection elements**********")
+    println("the first collection element is: '${collection.first()}'")
+    println("the last collection element is: '${collection.last()}'")
 } // end printEdgeElements()
 
 /**
@@ -125,24 +112,20 @@ fun printListEdgeElements() {
 // } // end printListSize()
 
 /**
- * prints true to standard output if a vehicle exists in the list. otherwise, prints
- * false
+ * returns true to standard output if an element exists in the list or set collection.
+ * otherwise, return false
  *
- * @param none
- * @return none
+ * @param collection the collection of elements to print
+ * @param element the element to search for
+ * @return true if element exists in the collection, otherwise false
  * @throws none
  * @see none
  */
-fun isVehicleExists() {
-    println("**********is vehicle exists exercise**********")
-    val readOnlyElecVehicles = listOf("tesla 3-series", "hyundai ioniq", "ford mach-e",
-        "bmw i30")
-    val isExistsElectric = if ("tesla 3-series" in readOnlyElecVehicles) true else false
-    println("the 'tesla 3-series' exists is '$isExistsElectric'")
-
-    val isExistsPetrol = if ("ford mustang v8" in readOnlyElecVehicles) true else false
-    println("the 'ford mustang v8' exists is '$isExistsPetrol'")
-} // end isVehicleExists()
+fun isCollectionElemExists(collection: Collection<*>, element: String): Boolean {
+    println("**********is collection element exists exercise**********")
+    val isExistsCollElem = if (element in collection) true else false
+    return isExistsCollElem
+} // end isCollectionElemExists()
 
 /**
  * adds farm crops and prints the updated list to the standard output
@@ -265,17 +248,20 @@ fun processCollectionExercises() {
     println("**********list collection exercises**********")
     val readOnlyLanguages = listOf("tagalog", "deutsch", "norwegian", "english")
     printListsSetsElem(readOnlyLanguages)
+
     val mutableLanguages: MutableList<String> = readOnlyLanguages.toMutableList()
     addNewLanguage(mutableLanguages)
     printListsSetsElem(mutableLanguages)
 
-    // printInferredImmutableList()
-    // printDeclaredMutableList()
-    // printListCastingExercise()
-    // printListEdgeElements()
-    // print
-    // isVehicleExists()
-    // addFarmCrops()
+    val languagesLocked = castImmutableListsSetsColl(mutableLanguages)
+    // addNewLanguage(languagesLocked) // test for immutable list
+    printListsSetsElem(languagesLocked)
+
+    printListEdgeElements(languagesLocked)
+
+    val isElementExists = isCollectionElemExists(languagesLocked, "bali")
+    println("is 'english' in the list? $isElementExists")
+    
     // delFarmEquip()
 
     // set collection exercises
