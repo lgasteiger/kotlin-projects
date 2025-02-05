@@ -147,14 +147,13 @@ fun isVehicleExists() {
 /**
  * adds farm crops and prints the updated list to the standard output
  */
-fun addFarmCrops() {
-    println("**********add farm crops exercise**********")
-    val farmCrops: MutableList<String> = mutableListOf("corn", "peas", "beans",)
-    println("^^^^^the farm crops list before addition:^^^^^")
-    // printCollectionElem(farmCrops)
-    farmCrops.add("carrots")
-    println("^^^^^the farm crops list after addition of 'carrots' element^^^^^")
-    // printCollectionElem(farmCrops)
+fun addNewLanguage(myLanguages: MutableList<String>) {
+    println("**********add new spoken language**********")
+    println("please enter a new spoken language:")
+    val inputLang = readlnOrNull()
+    if (!inputLang.isNullOrEmpty()) {
+        myLanguages.add(inputLang.toString())
+    } // end if
 } // end addFarmCrops()
 
 /**
@@ -263,12 +262,12 @@ fun printImmutableMapExercise() {
  * @see none
  */
 fun processCollectionExercises() {
-    // list collection exercises
+    println("**********list collection exercises**********")
     val readOnlyLanguages = listOf("tagalog", "deutsch", "norwegian", "english")
     printListsSetsElem(readOnlyLanguages)
-    val mercurialLanguages: MutableList<String> = readOnlyLanguages.toMutableList()
-    mercurialLanguages.add("spanish")
-    printListsSetsElem(mercurialLanguages)
+    val mutableLanguages: MutableList<String> = readOnlyLanguages.toMutableList()
+    addNewLanguage(mutableLanguages)
+    printListsSetsElem(mutableLanguages)
 
     // printInferredImmutableList()
     // printDeclaredMutableList()
