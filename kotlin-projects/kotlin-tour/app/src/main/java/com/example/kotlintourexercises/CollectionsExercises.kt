@@ -93,23 +93,10 @@ fun printListEdgeElements(collection: Collection<*>) {
  * @throws none
  * @see none
  */
-//fun printCollectionSize(collection: Any) {
-//    println("**********print collection list, set, or map size exercise**********")
-//    when (collection) {
-//        is List<*> -> {
-//            println("the size of the list is ${collection.count()}")
-//        }
-//        is Set<*> -> {
-//            println("the size of the set is ${collection.count()}")
-//        }
-//        is Map<*, *> -> {
-//            println("the size of the map is ${collection.count()}")
-//        }
-//        else -> {
-//            println("unsupported collection type: $collection::class.simpleName")
-//        }
-//    } // end when (collection)
-// } // end printListSize()
+fun <T> printCollectionSize(collection: Collection<T>) {
+    println("**********prints collection list, set, or map size**********")
+    return println("the size of the collection is ${collection.count()}")
+} // end printCollectionSize()
 
 /**
  * returns true to standard output if an element exists in the list or set collection.
@@ -122,41 +109,61 @@ fun printListEdgeElements(collection: Collection<*>) {
  * @see none
  */
 fun isCollectionElemExists(collection: Collection<*>, element: String): Boolean {
-    println("**********is collection element exists exercise**********")
+    println("**********is collection element exists test**********")
     val isExistsCollElem = if (element in collection) true else false
     return isExistsCollElem
 } // end isCollectionElemExists()
 
 /**
- * adds farm crops and prints the updated list to the standard output
+ * adds an element to the list collection
+ *
+ * @param list the list of elements
+ * @param element the element to add
+ * @return none
+ * @throws none
  */
-fun addNewLanguage(myLanguages: MutableList<String>) {
-    println("**********add new spoken language**********")
-    println("please enter a new spoken language:")
-    val inputLang = readlnOrNull()
-    if (!inputLang.isNullOrEmpty()) {
-        myLanguages.add(inputLang.toString())
-    } // end if
-} // end addFarmCrops()
+fun <T> addToList(list: MutableList<T>, element: T) {
+    list.add(element)
+} // end addToList()
 
 /**
- * deletes farm equipment and prints the updated list to the standard output
+ * adds a new language to the list collection
  *
- * @param none
+ * @param myLanguages the list of languages
  * @return none
  * @throws none
  * @see none
  */
-fun delFarmEquip() {
-    println("**********delete farm equipment exercise**********")
-    val farmEquipment: MutableList<String> = mutableListOf("shovel", "hoe", "water filter",
-        "tractor",)
-    println("-----the farm equipment list before deletion-----")
-    // printCollectionElem(farmEquipment)
-    farmEquipment.remove("shovel")
-    println("-----the farm equipment list after deletion of 'shovel' element-----")
-    // printCollectionElem(farmEquipment)
-} // end delFarmEquip()
+fun addNewLanguage(myLanguages: MutableList<String>) {
+    println("**********add new element to collection**********")
+    println("please enter a new spoken language:")
+    val inputLang = readlnOrNull()
+    if (!inputLang.isNullOrEmpty()) {
+        addToList(myLanguages, inputLang)
+    } // end if
+} // end addNewLanguage()
+
+fun <T> delListSetElem(collection: MutableCollection<T>, element: T) {
+    println("**********delete existing list or set collection element**********")
+    collection.remove(element)
+} // end delListSetElem()
+
+/**
+ * deletes specified language from the list collection
+ *
+ * @param currLanguages the list of languages
+ * @return none
+ * @throws none
+ * @see none
+ */
+fun delCurrLanguage(currLanguages: MutableList<String>) {
+    println("**********delete existing language exercise**********")
+    println("please enter the language to delete:")
+    val inputLang = readlnOrNull()
+    if (inputLang != null) {
+        delListSetElem(currLanguages, inputLang)
+    } // end if
+} // end delCurrLanguage()
 
 /**
  * prints read only unique set elements to standard output
@@ -237,7 +244,7 @@ fun printImmutableMapExercise() {
 } // end printImmutableMapExercise()
 
 /**
- * is the driver for processing all the collection exercises
+ * is the driver for processing all the collection function exercises
  *
  * @param none
  * @return none
@@ -248,21 +255,28 @@ fun processCollectionExercises() {
     println("**********list collection exercises**********")
     val readOnlyLanguages = listOf("tagalog", "deutsch", "norwegian", "english")
     printListsSetsElem(readOnlyLanguages)
+    printCollectionSize(readOnlyLanguages)
 
     val mutableLanguages: MutableList<String> = readOnlyLanguages.toMutableList()
     addNewLanguage(mutableLanguages)
     printListsSetsElem(mutableLanguages)
+    printCollectionSize(mutableLanguages)
 
     val languagesLocked = castImmutableListsSetsColl(mutableLanguages)
     // addNewLanguage(languagesLocked) // test for immutable list
     printListsSetsElem(languagesLocked)
+    printCollectionSize(languagesLocked)
 
     printListEdgeElements(languagesLocked)
 
-    val isElementExists = isCollectionElemExists(languagesLocked, "bali")
+    val isElementExists = isCollectionElemExists(languagesLocked, "english")
     println("is 'english' in the list? $isElementExists")
-    
-    // delFarmEquip()
+    val isHindiExists = isCollectionElemExists(languagesLocked, "hindi")
+    println("is 'hindi' in the list? $isHindiExists")
+
+    delCurrLanguage(mutableLanguages)
+    printListsSetsElem(mutableLanguages)
+    printCollectionSize(mutableLanguages)
 
     // set collection exercises
     // printImmutableSetExercise()
