@@ -50,7 +50,7 @@ fun printMapElements(collection: Map<*, *>) {
  * @throws none
  * @see none
  */
-fun castImmutableListsSetsColl(collection: Collection<*>): Collection<*> {
+fun castImmutableCollection(collection: Collection<*>): Collection<*> {
     println("**********return immutable collection version**********")
     when (collection) {
         is List<*> -> {
@@ -69,7 +69,7 @@ fun castImmutableListsSetsColl(collection: Collection<*>): Collection<*> {
             return collection
         } // end is...else
     } // end when (collection)
-} // end castImmutableListsSetsColl()
+} // end castImmutableCollection()
 
 /**
  * prints edge (first and last) collection elements to the standard output
@@ -79,11 +79,11 @@ fun castImmutableListsSetsColl(collection: Collection<*>): Collection<*> {
  * @throws none
  * @see none
  */
-fun printListEdgeElements(collection: Collection<*>) {
+fun printCollEdgeElements(collection: Collection<*>) {
     println("**********prints edge (first and last) collection elements**********")
     println("the first collection element is: '${collection.first()}'")
     println("the last collection element is: '${collection.last()}'")
-} // end printEdgeElements()
+} // end printCollEdgeElements()
 
 /**
  * prints list size to the standard output
@@ -127,12 +127,24 @@ fun <T> addToList(list: MutableList<T>, element: T) {
 } // end addToList()
 
 /**
+ * adds an element to the set collection
+ *
+ * @param set the set of elements
+ * @return none
+ * @throws none
+ * @see none
+ */
+fun <T> addToSet(set: MutableSet<T>, element: T) {
+    set.add(element)
+} // end addToSet()
+
+/**
  * adds a new language to the list collection
  *
  * @param myLanguages the list of languages
  * @return none
  * @throws none
- * @see none
+ * @see addToList()
  */
 fun addNewLanguage(myLanguages: MutableList<String>) {
     println("**********add new element to collection**********")
@@ -143,6 +155,31 @@ fun addNewLanguage(myLanguages: MutableList<String>) {
     } // end if
 } // end addNewLanguage()
 
+/**
+ * adds a new agency to the set collection
+ *
+ * @param myAgencies the list of agencies
+ * @return none
+ * @throws none
+ * @see addToSet()
+ */
+fun addNewAgency(myAgencies: MutableSet<String>) {
+    println("**********add new government agency to set collection**********")
+    println("please enter a new government agency:")
+    val inputAgency = readlnOrNull()
+    if (!inputAgency.isNullOrEmpty()) {
+        addToSet(myAgencies, inputAgency)
+    } // end if
+} // end addNewAgency()
+
+/**
+ * deletes an element from the list or set collection
+ *
+ * @param collection the list or set of elements
+ * @return
+ * @throws none
+ * @see none
+ */
 fun <T> delListSetElem(collection: MutableCollection<T>, element: T) {
     println("**********delete existing list or set collection element**********")
     collection.remove(element)
@@ -154,82 +191,61 @@ fun <T> delListSetElem(collection: MutableCollection<T>, element: T) {
  * @param currLanguages the list of languages
  * @return none
  * @throws none
- * @see none
+ * @see delListSetElem()
  */
-fun delCurrLanguage(currLanguages: MutableList<String>) {
-    println("**********delete existing language exercise**********")
+fun delLanguage(collection: MutableCollection<String>) {
+    println("**********delete existing language element**********")
     println("please enter the language to delete:")
     val inputLang = readlnOrNull()
     if (inputLang != null) {
-        delListSetElem(currLanguages, inputLang)
+        when (collection) {
+            is List<*> -> {
+                val uniqueElements = collection.distinct() as MutableList<String>
+                delListSetElem(uniqueElements, inputLang)
+                printListsSetsElem(uniqueElements)
+                printCollectionSize(uniqueElements)
+            }
+            is Set<*> -> {
+                delListSetElem(collection, inputLang)
+            }
+            else -> {
+                println("unsupported collection type: $collection::class.simpleName")
+            }
+        } // end when (collection)
     } // end if
-} // end delCurrLanguage()
+} // end delLanguage()
 
 /**
- * prints read only unique set elements to standard output
+ * deletes specified agency from the set collection
  *
- * @param none
+ * @param collection the set of agencies
  * @return none
  * @throws none
- * @see none
+ * @see delListSetElem()
  */
-fun printImmutableSetExercise() {
-    println("**********print read only set exercise**********")
-    val readOnlyGovAgencies = setOf("cbp", "cia", "nsa", "fbi", "cbp", "fbi")
-    // printCollectionElem(readOnlyGovAgencies)
-} // end printImmutableSetExercise()
+fun delAgency(collection: MutableCollection<String>) {
+    println("**********delete existing government agency**********")
+    println("please enter the government agency to delete:")
+    val inputAgency = readlnOrNull()
+    if (inputAgency != null) {
+        when (collection) {
+            is List<*> -> {
+                val uniqueElements = collection.distinct() as MutableList<String>
+                delListSetElem(uniqueElements, inputAgency)
+                printListsSetsElem(uniqueElements)
+                printCollectionSize(uniqueElements)
+            }
 
-/**
- * prints mutable unique set elements to standard output
- *
- * @param none
- * @return none
- * @throws none
- * @see none
- */
-fun printMutableSetExercise() {
-    println("**********print mutable set exercise*******")
-    val superheroes: MutableSet<String> = mutableSetOf("superman", "batman", "wonder woman",
-        "flash", "batman", "robin", "robin")
-    // printCollectionElem(superheroes)
-} // end printSetExercises()
+            is Set<*> -> {
+                delListSetElem(collection, inputAgency)
+            }
 
-/**
- * prints the number of elements in the set to standard output
- *
- * @param none
- * @return none
- * @throws none
- * @see none
- */
-fun getAircraftCount() {
-    println("**********get aircraft count exercise**********")
-    val readOnlyAircraft = setOf("F-18", "F-16", "F-14",)
-    println("the number of aircraft is ${readOnlyAircraft.count()}")
-} // end getAircraftCount()
-
-/**
- * adds a new element to the set collection data structure
- * @param newShipName the name of the new naval ship
- * @return none
- * @throws none
- * @see none
- */
-fun addNewShipType(newShipType: String, navalShipTypes: MutableList<String>) {
-    println("**********add new naval ship type exercise**********")
-    if (newShipType !in navalShipTypes) {
-        navalShipTypes.add(newShipType)
-        // printElements(navalShipTypes)
+            else -> {
+                println("unsupported collection type: $collection::class.simpleName")
+            }
+        } // end when (collection)
     } // end if
-} // end addNewShipType(newShipName: String, navalShipTypes: MutableList<String>)
-
-fun delShipType(existingShipType: String, navalShipTypes: MutableList<String>) {
-    println("**********delete naval ship type exercise**********")
-    if (existingShipType in navalShipTypes) {
-        navalShipTypes.remove(existingShipType)
-        // printElements(navalShipTypes)
-    } // end if
-} // end delShipType(existingShipType: String)
+} // end delAgency()
 
 /**
  * prints an immutable map to standard output
@@ -253,7 +269,7 @@ fun printImmutableMapExercise() {
  */
 fun processCollectionExercises() {
     println("**********list collection exercises**********")
-    val readOnlyLanguages = listOf("tagalog", "deutsch", "norwegian", "english")
+    val readOnlyLanguages = listOf("tagalog", "deutsch", "norwegian", "english", "english")
     printListsSetsElem(readOnlyLanguages)
     printCollectionSize(readOnlyLanguages)
 
@@ -262,36 +278,46 @@ fun processCollectionExercises() {
     printListsSetsElem(mutableLanguages)
     printCollectionSize(mutableLanguages)
 
-    val languagesLocked = castImmutableListsSetsColl(mutableLanguages)
+    val languagesLocked = castImmutableCollection(mutableLanguages)
     // addNewLanguage(languagesLocked) // test for immutable list
     printListsSetsElem(languagesLocked)
     printCollectionSize(languagesLocked)
 
-    printListEdgeElements(languagesLocked)
+    printCollEdgeElements(languagesLocked)
 
     val isElementExists = isCollectionElemExists(languagesLocked, "english")
     println("is 'english' in the list? $isElementExists")
     val isHindiExists = isCollectionElemExists(languagesLocked, "hindi")
     println("is 'hindi' in the list? $isHindiExists")
 
-    delCurrLanguage(mutableLanguages)
-    printListsSetsElem(mutableLanguages)
-    printCollectionSize(mutableLanguages)
+    delLanguage(mutableLanguages)
 
     // set collection exercises
-    // printImmutableSetExercise()
-    // printMutableSetExercise()
-    // getAircraftCount()
+    println("**********set collection exercises**********")
+    val readOnlyGovAgencies = setOf("cbp", "cia", "nsa", "fbi", "cbp", "fbi")
+    printListsSetsElem(readOnlyGovAgencies)
+    printCollectionSize(readOnlyGovAgencies)
 
-    // val navalShipTypes: MutableList<String> = mutableListOf("supply ship", "aircraft carrier",
-    //    "battleship", "cutter",)
-    // addNewShipType("reconnaissance", navalShipTypes)
-    // delShipType("aircraft carrier", navalShipTypes)
+    val mutableGovAgencies: MutableSet<String> = readOnlyGovAgencies.toMutableSet()
+    addNewAgency(mutableGovAgencies)
+    printListsSetsElem(mutableGovAgencies)
+    printCollectionSize(mutableGovAgencies)
 
-    // map collection exercises
+    val agenciesLocked = castImmutableCollection(mutableGovAgencies)
+    printListsSetsElem(agenciesLocked)
+    printCollectionSize(agenciesLocked)
 
-    /**
-     * TODO: add prompt to return specific element to standard output
-     * println("the second tool in the toolbox is '${toolBoxLocked[1]}'")
-     */
+    printCollEdgeElements(agenciesLocked)
+
+    val isAgencyExists = isCollectionElemExists(agenciesLocked, "cia")
+    println("is 'cia' in the set? $isAgencyExists")
+    val isAgencyExists2 = isCollectionElemExists(agenciesLocked, "ciaa")
+    println("is 'ciaa' in the set? $isAgencyExists2")
+
+    delAgency(mutableGovAgencies)
+    printListsSetsElem(mutableGovAgencies)
+    printCollectionSize(mutableGovAgencies)
+
+    // TODO: map collection exercises
+
 } // end processCollectionExercises()
