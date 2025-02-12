@@ -54,12 +54,12 @@ fun printMapElements(collection: Map<*, *>) {
 fun <T> castImmutableListSet(collection: Collection<T>): Collection<T> {
     println("**********return immutable collection version**********")
     when (collection) {
-        is List<T> -> {
-            val listLocked: List<T> = collection
+        is List<*> -> {
+            val listLocked: Collection<T> = collection
             return listLocked
         }
-        is Set<T> -> {
-            val setLocked: Set<T> = collection
+        is Set<*> -> {
+            val setLocked: Collection<T> = collection
             return setLocked
         }
         else -> {
@@ -83,11 +83,11 @@ fun castImmutableMap(collection: Map<*, *>): Map<*, *> {
  * @throws none
  * @see none
  */
-fun printCollEdgeElements(collection: Collection<*>) {
+fun printListSetEdgeElem(collection: Collection<*>) {
     println("**********prints edge (first and last) collection elements**********")
     println("the first collection element is: '${collection.first()}'")
     println("the last collection element is: '${collection.last()}'")
-} // end printCollEdgeElements()
+} // end printListSetEdgeElements()
 
 /**
  * prints list size to the standard output
@@ -97,12 +97,12 @@ fun printCollEdgeElements(collection: Collection<*>) {
  * @throws none
  * @see none
  */
-fun <T> printListSetSize(collection: Collection<T>) {
+fun printListSetSize(collection: Collection<*>) {
     println("**********prints collection list, set, or map size**********")
     return println("the size of the collection is ${collection.count()}")
 } // end printCollectionSize()
 
-fun <T> printMapSize(collection: Map<T, T>) {
+fun printMapSize(collection: Map<*, *>) {
     println("**********prints map size**********")
     return println("the size of the map is ${collection.count()}")
 } // end printMapSize()
@@ -117,23 +117,11 @@ fun <T> printMapSize(collection: Map<T, T>) {
  * @throws none
  * @see none
  */
-fun isCollectionElemExists(collection: Collection<*>, element: Any): Boolean {
+fun isListSetElemExists(collection: Collection<*>, element: Any): Boolean {
     println("**********is collection element exists test**********")
     val isExistsCollElem = if (element in collection) true else false
     return isExistsCollElem
-} // end isCollectionElemExists()
-
-/**
- * adds an element to the set collection
- *
- * @param set the set of elements
- * @return none
- * @throws none
- * @see addNewAgency()
- */
-fun <T> addToSet(set: MutableSet<T>, element: T) {
-    set.add(element)
-} // end addToSet()
+} // end isListSetElemExists()
 
 /**
  * adds an element to the map collection
@@ -244,22 +232,24 @@ fun <T> delLanguage(collection: Collection<T>): Collection<T> {
 
     println("please enter the language to delete:")
     val inputLang = readlnOrNull()
-    if (inputLang != null) {
+    if (!inputLang.isNullOrEmpty()) {
         when (collection) {
             is List<T> -> {
                 val uniqueElements = collection.toMutableList().distinct() as MutableList<T>
-                delListSetElem(uniqueElements, inputLang as T)
+                uniqueElements.remove(inputLang as T)
                 return castImmutableListSet(uniqueElements)
             }
             is Set<T> -> {
                 val mutableSet = collection.toMutableSet()
-                delListSetElem(mutableSet, inputLang as T)
+                mutableSet.remove(inputLang as T)
                 return castImmutableListSet(mutableSet)
             }
             else -> {
                 println("unsupported collection type: $collection::class.simpleName")
             }
         } // end when (collection)
+    } else {
+        println("nothing to delete")
     } // end if
 
     return collection
@@ -312,18 +302,19 @@ fun processCollectionExercises() {
     val languagesLocked = addNewLanguage(readOnlyLanguages)
     printListsSetsElem(languagesLocked)
     printListSetSize(languagesLocked)
-    printCollEdgeElements(languagesLocked)
+    printListSetEdgeElem(languagesLocked)
 
-    val isElementExists = isCollectionElemExists(languagesLocked, "english")
+    val isElementExists = isListSetElemExists(languagesLocked, "english")
     println("is 'english' in the list? $isElementExists")
-    val isHindiExists = isCollectionElemExists(languagesLocked, "hindi")
+    val isHindiExists = isListSetElemExists(languagesLocked, "hindi")
     println("is 'hindi' in the list? $isHindiExists")
 
     val languagesLocked2 = delLanguage(languagesLocked)
     printListsSetsElem(languagesLocked2)
     printListSetSize(languagesLocked2)
-    printCollEdgeElements(languagesLocked2)
+    printListSetEdgeElem(languagesLocked2)
 
+    /*
     println("**********set collection exercises**********")
     val readOnlyGovAgencies = setOf("cbp", "cia", "nsa", "fbi", "cbp", "fbi")
     printListsSetsElem(readOnlyGovAgencies)
@@ -332,18 +323,17 @@ fun processCollectionExercises() {
     val govAgenciesLocked = addNewAgency(readOnlyGovAgencies)
     printListsSetsElem(govAgenciesLocked)
     printListSetSize(govAgenciesLocked)
-    printCollEdgeElements(govAgenciesLocked)
+    printListSetEdgeElem(govAgenciesLocked)
 
-    val isAgencyExists = isCollectionElemExists(govAgenciesLocked, "cia")
+    val isAgencyExists = isListSetElemExists(govAgenciesLocked, "cia")
     println("is 'cia' in the set? $isAgencyExists")
-    val isAgencyExists2 = isCollectionElemExists(govAgenciesLocked, "ciaa")
+    val isAgencyExists2 = isListSetElemExists(govAgenciesLocked, "ciaa")
     println("is 'ciaa' in the set? $isAgencyExists2")
 
     // delAgency(mutableGovAgencies)
     // printListsSetsElem(mutableGovAgencies)
     // printListSetSize(mutableGovAgencies)
 
-    /*
     // map collection exercises
     println("**********map collection exercises**********")
     val readOnlyProjectLangs = mapOf("auto db mobile" to "kotlin android",
