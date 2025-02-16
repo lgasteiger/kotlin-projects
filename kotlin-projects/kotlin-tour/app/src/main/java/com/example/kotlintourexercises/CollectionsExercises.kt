@@ -161,16 +161,17 @@ fun <T> addMapKeyValPair(readOnlyMapColl: Map<T, T>): Map<T, T> {
     println("please enter a new map key element:")
     val inputKey = readlnOrNull()
     if (!inputKey.isNullOrEmpty()) {
-        println("please enter new map value element:")
-        val inputValue = readlnOrNull()
-        if (!inputValue.isNullOrEmpty()) {
-            if (!mutableMap.containsKey(inputKey as T)) {
+        if (!mutableMap.containsKey(inputKey as T)) {
+            println("please enter a new map value element:")
+            val inputValue = readlnOrNull()
+            if (!inputValue.isNullOrEmpty()) {
                 mutableMap[inputKey] = inputValue as T
             } else {
-                println("!!!!!sorry, the key already exists in map, please enter a unique key!!!!!")
+                println("nothing to add")
             } // end if
         } else {
-            println("nothing to add")
+            println("!!!!!sorry, the key, '$inputKey', already exists in the map, please enter " +
+                    "a unique key!!!!!")
         } // end if
     } else {
         println("nothing to add")
@@ -214,6 +215,25 @@ fun <T> delListSetElem(collection: Collection<T>): Collection<T> {
 
     return collection
 } // end delListSetElem()
+
+fun <T> delMapKeyValPair(collection: Map<T, T>): Map<T, T> {
+    println("**********delete existing map key/value pair**********")
+    val mutableMap = collection.toMutableMap()
+    println("please enter the key to delete:")
+    val inputKey = readlnOrNull()
+    if (!inputKey.isNullOrEmpty()) {
+        if (mutableMap.containsKey(inputKey as T)) {
+            mutableMap.remove(inputKey)
+        } else {
+            println("!!!!!sorry, the key, '$inputKey', does not exist in the map, there is " +
+                    "nothing to delete!!!!!")
+        } // end if
+    } else {
+        println("nothing to delete")
+    } // end if
+
+    return castImmutableMap(mutableMap)
+} // end delMapKeyValPair()
 
 /**
  * is the driver for processing all the collection function exercises
@@ -278,16 +298,17 @@ fun processCollectionExercises() {
     val readOnlyProjectLangs = mapOf("auto db mobile" to "kotlin android",
         "auto db web" to "django typescript", "llm agent test data" to "python",
         "llm agent rag reporting" to "python",)
-    //val currGovAgencyStatus = mutableMapOf("cbp" to "downsize", "cia" to "downsize",
-    //    "fbi" to "downsize", "nsa" to "downsize", "nasa" to "increase", "gsa" to "downsize",
-    //    "fema" to "downsize", "tsa" to "increase", "doe" to "increase",)
+    val readOnlyGovAgencyStatus = mapOf("cbp" to "downsize", "cia" to "downsize",
+        "fbi" to "downsize", "nsa" to "downsize", "nasa" to "increase", "gsa" to "downsize",
+        "fema" to "downsize", "tsa" to "increase", "doe" to "increase",)
 
     printMapElements(readOnlyProjectLangs)
     val projectsLocked = addMapKeyValPair(readOnlyProjectLangs)
     printMapElements(projectsLocked)
     printMapSize(projectsLocked)
 
-    // printMapElements(currGovAgencyStatus)
-    // TODO: remove agency if agency exists in map. otherwise, print message to standard output.
-    // prints agency's map key/value pairs count to standard output
+    printMapElements(readOnlyGovAgencyStatus)
+    val govAgenciesLocked = delMapKeyValPair(readOnlyGovAgencyStatus)
+    printMapElements(govAgenciesLocked)
+    printMapSize(govAgenciesLocked)
 } // end processCollectionExercises()
