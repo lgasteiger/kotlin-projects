@@ -28,7 +28,7 @@ fun printListsSetsElem(collection: Collection<*>) {
 } // end printListsSetsElem(collection: Collection<String>)
 
 /**
- * prints elements in any map collection
+ * prints elements in any map collection to standard output
  *
  * @param collection the collection of elements to print
  * @return none
@@ -44,9 +44,9 @@ fun printMapElements(collection: Map<*, *>) {
 } // end printMapElements(collection: Map<*, *>)
 
 /**
- * prints casting exercises to the standard output
+ * returns an immutable list or set collection
  *
- * @param collection the collection of elements to print
+ * @param collection the collection of elements to cast
  * @return immutable list or set collection
  * @throws none
  * @see none
@@ -69,6 +69,13 @@ fun <T> castImmutableListSet(collection: Collection<T>): Collection<T> {
     } // end when (collection)
 } // end castImmutableListSet()
 
+/**
+ * returns an immutable map collection
+ * @param collection the collection of elements to cast
+ * @return immutable map collection
+ * @throws none
+ * @see none
+ */
 fun <T> castImmutableMap(collection: Map<T, T>): Map<T, T> {
     println("**********cast to immutable map collection**********")
     val mapLocked: Map<T, T> = collection
@@ -92,7 +99,7 @@ fun printListSetEdgeElem(collection: Collection<*>) {
 /**
  * prints list size to the standard output
  *
- * @param none
+ * @param collection the collection of elements to print
  * @return none
  * @throws none
  * @see none
@@ -102,6 +109,14 @@ fun printListSetSize(collection: Collection<*>) {
     return println("the size of the collection is ${collection.count()}")
 } // end printCollectionSize()
 
+/**
+ * prints map size to the standard output
+ *
+ * @param collection the collection of elements to print
+ * @return none
+ * @throws none
+ * @see none
+ */
 fun printMapSize(collection: Map<*, *>) {
     println("**********prints map size**********")
     return println("the size of the map is ${collection.count()}")
@@ -126,10 +141,10 @@ fun isListSetElemExists(collection: Collection<*>, element: Any): Boolean {
 /**
  * adds a new element to the list or set collection
  *
- * @param newListSetElem the list of languages
- * @return none
+ * @param newListSetElem the list, set of elements
+ * @return collection of elements
  * @throws none
- * @see addToList()
+ * @see none
  */
 fun <T> addListSetElem(newListSetElem: Collection<T>): Collection<T> {
     println("**********add new element to collection**********")
@@ -150,9 +165,9 @@ fun <T> addListSetElem(newListSetElem: Collection<T>): Collection<T> {
  * adds a new element to the map collection
  *
  * @param readOnlyMapColl the map of key/value pairs
- * @return none
+ * @return map of key/value pairs
  * @throws none
- * @see addToMap()
+ * @see none
  */
 fun <T> addMapKeyValPair(readOnlyMapColl: Map<T, T>): Map<T, T> {
     println("**********add new key/value pair to map collection**********")
@@ -183,8 +198,8 @@ fun <T> addMapKeyValPair(readOnlyMapColl: Map<T, T>): Map<T, T> {
 /**
  * deletes specified element from the list or set collection
  *
- * @param collection the list of languages
- * @return none
+ * @param collection the list of elements
+ * @return collection of elements
  * @throws none
  * @see none
  */
@@ -216,6 +231,14 @@ fun <T> delListSetElem(collection: Collection<T>): Collection<T> {
     return collection
 } // end delListSetElem()
 
+/**
+ * deletes specified key/value pair from the map collection
+ *
+ * @param collection the map of key/value pairs
+ * @return map of key/value pairs
+ * @throws none
+ * @see none
+ */
 fun <T> delMapKeyValPair(collection: Map<T, T>): Map<T, T> {
     println("**********delete existing map key/value pair**********")
     val mutableMap = collection.toMutableMap()
@@ -234,6 +257,53 @@ fun <T> delMapKeyValPair(collection: Map<T, T>): Map<T, T> {
 
     return castImmutableMap(mutableMap)
 } // end delMapKeyValPair()
+
+/**
+ * returns a collection of map keys
+ *
+ * @param collection the map of key/value pairs
+ * @return collection of map keys
+ * @throws none
+ * @see none
+ */
+fun getMapKeys(collection: Map<*, *>): Collection<*> {
+    println("**********get map keys**********")
+    return collection.keys
+} // end getMapKeys()
+
+/**
+ * returns a collection of map values
+ *
+ * @param collection the map of key/value pairs
+ * @return collection of map values
+ * @throws none
+ * @see none
+ */
+fun getMapValues(collection: Map<*, *>): Collection<*> {
+    println("**********get map values**********")
+    return collection.values
+} // end getMapValues()
+
+/**
+ * returns true to standard output if a key exists in the map collection.
+ *
+ * @param collection the map of key/value pairs
+ * @param key the key to search for
+ * @return true if key exists in the map, otherwise false
+ * @throws none
+ * @see none
+ */
+fun isMapKeyExists(collection: Map<*, *>, key: Any): Boolean {
+    println("**********is map key exists test**********")
+    val isExistsMapKey = if (key in collection.keys) true else false
+    return isExistsMapKey
+} // end isMapKeyExists()
+
+fun isMapValueExists(collection: Map<*, *>, value: Any): Boolean {
+    println("**********is map value exists test**********")
+    val isExistsMapValue = if (value in collection.values) true else false
+    return isExistsMapValue
+} // end isMapValueExists()
 
 /**
  * is the driver for processing all the collection function exercises
@@ -311,4 +381,16 @@ fun processCollectionExercises() {
     val govAgenciesLocked = delMapKeyValPair(readOnlyGovAgencyStatus)
     printMapElements(govAgenciesLocked)
     printMapSize(govAgenciesLocked)
+
+    val keys = getMapKeys(projectsLocked)
+    println("the map keys are: $keys")
+
+    val values = getMapValues(projectsLocked)
+    println("the map values are: $values")
+
+    val isKeyExists = isMapKeyExists(projectsLocked, "auto db mobile")
+    println("is 'auto db mobile' in the map? $isKeyExists")
+
+    val isValueExists = isMapValueExists(projectsLocked, "django svelte")
+    println("is 'django svelte' in the map? $isValueExists")
 } // end processCollectionExercises()
