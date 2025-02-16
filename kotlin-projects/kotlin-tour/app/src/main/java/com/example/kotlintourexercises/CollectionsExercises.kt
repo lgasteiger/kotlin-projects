@@ -317,7 +317,6 @@ fun processCollectionExercises() {
     /*****************************
      * list collection exercises *
      *****************************/
-    /*
     println("**********list collection exercises**********")
     val readOnlyLanguages = listOf("tagalog", "deutsch", "norwegian", "english", "english")
     printListsSetsElem(readOnlyLanguages)
@@ -359,7 +358,6 @@ fun processCollectionExercises() {
     val govAgenciesLocked2 = delListSetElem(govAgenciesLocked)
     printListsSetsElem(govAgenciesLocked2)
     printListSetSize(govAgenciesLocked2)
-    */
 
     /****************************
      * map collection exercises *
@@ -378,9 +376,9 @@ fun processCollectionExercises() {
     printMapSize(projectsLocked)
 
     printMapElements(readOnlyGovAgencyStatus)
-    val govAgenciesLocked = delMapKeyValPair(readOnlyGovAgencyStatus)
-    printMapElements(govAgenciesLocked)
-    printMapSize(govAgenciesLocked)
+    val govAgenciesMapLocked = delMapKeyValPair(readOnlyGovAgencyStatus)
+    printMapElements(govAgenciesMapLocked)
+    printMapSize(govAgenciesMapLocked)
 
     val keys = getMapKeys(projectsLocked)
     println("the map keys are: $keys")

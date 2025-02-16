@@ -10,5 +10,9 @@ fun main() {
     // printDeclaredTypes()
     // displayBasicTypesExercise()
 
-   processCollectionExercises()
+    // processCollectionExercises()
+
+    collectionsAssign1()
+    collectionsAssign2()
+    collectionsAssign3()
 } // end main()
