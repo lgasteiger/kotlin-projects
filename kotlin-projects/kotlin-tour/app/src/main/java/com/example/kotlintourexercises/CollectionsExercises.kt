@@ -69,9 +69,9 @@ fun <T> castImmutableListSet(collection: Collection<T>): Collection<T> {
     } // end when (collection)
 } // end castImmutableListSet()
 
-fun castImmutableMap(collection: Map<*, *>): Map<*, *> {
+fun <T> castImmutableMap(collection: Map<T, T>): Map<T, T> {
     println("**********cast to immutable map collection**********")
-    val mapLocked: Map<*, *> = collection
+    val mapLocked: Map<T, T> = collection
     return mapLocked
 } // end castImmutableMap()
 
@@ -124,34 +124,18 @@ fun isListSetElemExists(collection: Collection<*>, element: Any): Boolean {
 } // end isListSetElemExists()
 
 /**
- * adds an element to the map collection
+ * adds a new element to the list or set collection
  *
- * @param map the map of elements
- * @return none
- * @throws none
- * @see addNewProject()
- */
-fun <T> addToMap(map: MutableMap<T, T>, key: T, value: T) {
-    if (!map.containsKey(key)) {
-        map[key] = value
-    } else {
-        println("!!!!!sorry, the key already exists in map, please enter a unique key!!!!!")
-    } // end if
-} // end addToMap()
-
-/**
- * adds a new language to the list collection
- *
- * @param myLanguages the list of languages
+ * @param newListSetElem the list of languages
  * @return none
  * @throws none
  * @see addToList()
  */
-fun <T> addNewLanguage(myLanguages: Collection<T>): Collection<T> {
+fun <T> addListSetElem(newListSetElem: Collection<T>): Collection<T> {
     println("**********add new element to collection**********")
 
-    val mutableLanguages: MutableList<T> = myLanguages.toMutableList()
-    println("please enter a new spoken language:")
+    val mutableLanguages: MutableList<T> = newListSetElem.toMutableList()
+    println("please enter a new element:")
     val inputLang = readlnOrNull()
     if (!inputLang.isNullOrEmpty()) {
         mutableLanguages.add(inputLang as T)
@@ -160,77 +144,53 @@ fun <T> addNewLanguage(myLanguages: Collection<T>): Collection<T> {
     } // end if
 
     return castImmutableListSet(mutableLanguages)
-} // end addNewLanguage()
+} // end addListSetElem()
 
 /**
- * adds a new agency to the set collection
+ * adds a new element to the map collection
  *
- * @param myAgencies the list of agencies
- * @return none
- * @throws none
- * @see addToSet()
- */
-fun <T> addNewAgency(myAgencies: Collection <T>): Collection<T> {
-    println("**********add new government agency to set collection**********")
-
-    val mutableGovAgencies: MutableSet<T> = myAgencies.toMutableSet()
-    println("please enter a new government agency:")
-    val inputAgency = readlnOrNull()
-    if (!inputAgency.isNullOrEmpty()) {
-        mutableGovAgencies.add(inputAgency as T)
-    } else {
-        println("nothing to add")
-    } // end if
-
-    return castImmutableListSet(mutableGovAgencies)
-} // end addNewAgency()
-
-/**
- * adds a new project to the map collection
- *
- * @param myProjects the map of projects
+ * @param readOnlyMapColl the map of key/value pairs
  * @return none
  * @throws none
  * @see addToMap()
  */
-fun addNewProject(myProjects: MutableMap<String, String>) {
-    println("**********add new project to map collection**********")
-    println("please enter a new project name:")
-    val inputProject = readlnOrNull()
-    if (!inputProject.isNullOrEmpty()) {
-        println("please enter new project programming language:")
-        val inputProgLang = readlnOrNull()
-        if (!inputProgLang.isNullOrEmpty()) {
-            addToMap(myProjects, inputProject, inputProgLang)
+fun <T> addMapKeyValPair(readOnlyMapColl: Map<T, T>): Map<T, T> {
+    println("**********add new key/value pair to map collection**********")
+
+    val mutableMap = readOnlyMapColl.toMutableMap()
+    println("please enter a new map key element:")
+    val inputKey = readlnOrNull()
+    if (!inputKey.isNullOrEmpty()) {
+        println("please enter new map value element:")
+        val inputValue = readlnOrNull()
+        if (!inputValue.isNullOrEmpty()) {
+            if (!mutableMap.containsKey(inputKey as T)) {
+                mutableMap[inputKey] = inputValue as T
+            } else {
+                println("!!!!!sorry, the key already exists in map, please enter a unique key!!!!!")
+            } // end if
+        } else {
+            println("nothing to add")
         } // end if
+    } else {
+        println("nothing to add")
     } // end if
-} // end addNewProject()
+
+    return castImmutableMap(mutableMap)
+} // end addMapKeyValPair()
 
 /**
- * deletes an element from the list or set collection
- *
- * @param collection the list or set of elements
- * @return
- * @throws none
- * @see none
- */
-fun <T> delListSetElem(collection: MutableCollection<T>, element: T) {
-    println("**********delete existing list or set collection element**********")
-    collection.remove(element)
-} // end delListSetElem()
-
-/**
- * deletes specified language from the list collection
+ * deletes specified element from the list or set collection
  *
  * @param collection the list of languages
  * @return none
  * @throws none
- * @see delListSetElem()
+ * @see none
  */
-fun <T> delLanguage(collection: Collection<T>): Collection<T> {
+fun <T> delListSetElem(collection: Collection<T>): Collection<T> {
     println("**********delete existing language element**********")
 
-    println("please enter the language to delete:")
+    println("please enter the element to delete:")
     val inputLang = readlnOrNull()
     if (!inputLang.isNullOrEmpty()) {
         when (collection) {
@@ -253,37 +213,7 @@ fun <T> delLanguage(collection: Collection<T>): Collection<T> {
     } // end if
 
     return collection
-} // end delLanguage()
-
-/**
- * deletes specified agency from the set collection
- *
- * @param collection the set of agencies
- * @return none
- * @throws none
- * @see delListSetElem()
- */
-fun delAgency(collection: MutableCollection<String>) {
-    println("**********delete existing government agency**********")
-    println("please enter the government agency to delete:")
-    val inputAgency = readlnOrNull()
-    if (inputAgency != null) {
-        when (collection) {
-            is List<*> -> {
-                val uniqueElements = collection.distinct() as MutableList<String>
-                delListSetElem(uniqueElements, inputAgency)
-                printListsSetsElem(uniqueElements)
-                printListSetSize(uniqueElements)
-            }
-            is Set<*> -> {
-                delListSetElem(collection, inputAgency)
-            }
-            else -> {
-                println("unsupported collection type: $collection::class.simpleName")
-            }
-        } // end when (collection)
-    } // end if
-} // end delAgency()
+} // end delListSetElem()
 
 /**
  * is the driver for processing all the collection function exercises
@@ -294,12 +224,16 @@ fun delAgency(collection: MutableCollection<String>) {
  * @see none
  */
 fun processCollectionExercises() {
+    /*****************************
+     * list collection exercises *
+     *****************************/
+    /*
     println("**********list collection exercises**********")
     val readOnlyLanguages = listOf("tagalog", "deutsch", "norwegian", "english", "english")
     printListsSetsElem(readOnlyLanguages)
     printListSetSize(readOnlyLanguages)
 
-    val languagesLocked = addNewLanguage(readOnlyLanguages)
+    val languagesLocked = addListSetElem(readOnlyLanguages)
     printListsSetsElem(languagesLocked)
     printListSetSize(languagesLocked)
     printListSetEdgeElem(languagesLocked)
@@ -309,18 +243,20 @@ fun processCollectionExercises() {
     val isHindiExists = isListSetElemExists(languagesLocked, "hindi")
     println("is 'hindi' in the list? $isHindiExists")
 
-    val languagesLocked2 = delLanguage(languagesLocked)
+    val languagesLocked2 = delListSetElem(languagesLocked)
     printListsSetsElem(languagesLocked2)
     printListSetSize(languagesLocked2)
     printListSetEdgeElem(languagesLocked2)
 
-    /*
+    /****************************
+     * set collection exercises *
+     ****************************/
     println("**********set collection exercises**********")
     val readOnlyGovAgencies = setOf("cbp", "cia", "nsa", "fbi", "cbp", "fbi")
     printListsSetsElem(readOnlyGovAgencies)
     printListSetSize(readOnlyGovAgencies)
 
-    val govAgenciesLocked = addNewAgency(readOnlyGovAgencies)
+    val govAgenciesLocked = addListSetElem(readOnlyGovAgencies)
     printListsSetsElem(govAgenciesLocked)
     printListSetSize(govAgenciesLocked)
     printListSetEdgeElem(govAgenciesLocked)
@@ -330,33 +266,28 @@ fun processCollectionExercises() {
     val isAgencyExists2 = isListSetElemExists(govAgenciesLocked, "ciaa")
     println("is 'ciaa' in the set? $isAgencyExists2")
 
-    // delAgency(mutableGovAgencies)
-    // printListsSetsElem(mutableGovAgencies)
-    // printListSetSize(mutableGovAgencies)
+    val govAgenciesLocked2 = delListSetElem(govAgenciesLocked)
+    printListsSetsElem(govAgenciesLocked2)
+    printListSetSize(govAgenciesLocked2)
+    */
 
-    // map collection exercises
+    /****************************
+     * map collection exercises *
+     ****************************/
     println("**********map collection exercises**********")
     val readOnlyProjectLangs = mapOf("auto db mobile" to "kotlin android",
         "auto db web" to "django typescript", "llm agent test data" to "python",
         "llm agent rag reporting" to "python",)
-    val currGovAgencyStatus = mutableMapOf("cbp" to "downsize", "cia" to "downsize",
-        "fbi" to "downsize", "nsa" to "downsize", "nasa" to "increase", "gsa" to "downsize",
-        "fema" to "downsize", "tsa" to "increase", "doe" to "increase",)
+    //val currGovAgencyStatus = mutableMapOf("cbp" to "downsize", "cia" to "downsize",
+    //    "fbi" to "downsize", "nsa" to "downsize", "nasa" to "increase", "gsa" to "downsize",
+    //    "fema" to "downsize", "tsa" to "increase", "doe" to "increase",)
 
     printMapElements(readOnlyProjectLangs)
-    val currProjects = readOnlyProjectLangs.toMutableMap()
-    addNewProject(currProjects)
-    printMapElements(currProjects)
-    printMapSize(currProjects)
-    val projectsLocked = castImmutableMap(currProjects)
+    val projectsLocked = addMapKeyValPair(readOnlyProjectLangs)
     printMapElements(projectsLocked)
-    // printMapSize(projectsLocked)
-
-    // TODO: add project if not already in map. otherwise, print message to standard output.
-    // prints project's map key/value pairs count to standard output
+    printMapSize(projectsLocked)
 
     // printMapElements(currGovAgencyStatus)
     // TODO: remove agency if agency exists in map. otherwise, print message to standard output.
     // prints agency's map key/value pairs count to standard output
-    */
 } // end processCollectionExercises()
