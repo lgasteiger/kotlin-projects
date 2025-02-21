@@ -12,7 +12,9 @@ fun main() {
 
     // processCollectionExercises()
 
-    collectionsAssign1()
-    collectionsAssign2()
-    collectionsAssign3()
+    // collectionsAssign1()
+    // collectionsAssign2()
+    // collectionsAssign3()
+
+    processControlFlowExercises()
 } // end main()
