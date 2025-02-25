@@ -34,8 +34,43 @@ fun <T : Comparable<T>>compareGreaterNum(num1: T, num2: T): T {
     return maxOf(num1, num2)
 } // end checkGreaterNum(min: T, max: T)
 
-// fun processGreeting() {
-// }
+fun isRealNumber(input: String): Boolean {
+    println("*****executing isRealNumber()*****")
+
+    return try {
+        input.toDouble()
+        true
+    } catch (e: NumberFormatException) {
+        false
+    } // end try...catch
+} // end isRealNumber(input: String)
+
+fun processGreeting(strArg: String): String {
+    println("*****executing processGreeting()*****")
+
+    val lowerCaseFormat = strArg.lowercase()
+    var strReturn: String = ""
+
+    if (isRealNumber(lowerCaseFormat)) {
+        when (strArg) {
+            "1" -> strReturn = "one"
+            "2" -> strReturn =  "two"
+            "3" -> strReturn = "three"
+            "4" -> strReturn = "four"
+            "5" -> strReturn = "five"
+            "6" -> strReturn = "six"
+            "7" -> strReturn = "seven"
+            "8" -> strReturn = "eight"
+            "9" -> strReturn = "nine"
+        } // end when (strArg)
+    } else if (lowerCaseFormat == "hello") {
+        strReturn = "greeting"
+    } else {
+        strReturn = "unknown"
+    } // end if...else
+
+    return strReturn
+} // end processGreeting()
 
 fun processControlFlowExercises() {
     println("*****executing processControlFlowExercises()*****")
@@ -52,4 +87,9 @@ fun processControlFlowExercises() {
     val b = 2
     val maxVal = compareGreaterNum(a, b)
     println("the greater number is: $maxVal")
+
+    val obj = "Hello"
+    val strResult = processGreeting(obj)
+    val strCapitalized = strResult.replaceFirstChar { it.uppercase() }
+    println("the string result is: $strCapitalized")
 } // end processControlFlowExercises()
