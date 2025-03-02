@@ -34,6 +34,14 @@ fun <T : Comparable<T>>compareGreaterNum(num1: T, num2: T): T {
     return maxOf(num1, num2)
 } // end checkGreaterNum(min: T, max: T)
 
+/**
+ * checks if a string is a real number on the number line
+ *
+ * @param input the string to check
+ * @return true if the string is a real number, otherwise false
+ * @throws none
+ * @see none
+ */
 fun isRealNumber(input: String): Boolean {
     println("*****executing isRealNumber()*****")
 
@@ -45,6 +53,14 @@ fun isRealNumber(input: String): Boolean {
     } // end try...catch
 } // end isRealNumber(input: String)
 
+/**
+ * processes a greeting
+ *
+ * @param strArg the string to process
+ * @return the processed string greeting
+ * @throws none
+ * @see none
+ */
 fun processGreeting(strArg: String): String {
     println("*****executing processGreeting()*****")
 
@@ -72,6 +88,30 @@ fun processGreeting(strArg: String): String {
     return strReturn
 } // end processGreeting()
 
+fun printTrafficLightStatus(color: String) {
+    println("*****executing printTrafficLightStatus()*****")
+
+    val colorLowercase = color.lowercase()
+    val trafficAction = when (colorLowercase) {
+        "green" -> "Go"
+        "yellow" -> "Get ready"
+        "red" -> "Stop"
+        else -> "malfunction"
+    } // end when (color)
+
+    val colorLowercaseCapitalized = colorLowercase.replaceFirstChar { it.uppercase() }
+    println("the traffic light is '$colorLowercaseCapitalized' and the action is '$trafficAction'")
+} // end printTrafficLightStatus(color: String)
+
+/**
+ * this is the driver for the control flow exercises from the brilliant kotlin documentation
+ * "kotlin tour" tutorial
+ *
+ * @param none
+ * @return none
+ * @throws none
+ * @see none
+ */
 fun processControlFlowExercises() {
     println("*****executing processControlFlowExercises()*****")
 
@@ -88,8 +128,21 @@ fun processControlFlowExercises() {
     val maxVal = compareGreaterNum(a, b)
     println("the greater number is: $maxVal")
 
+    val c = 5.2
+    val d = 2.5
+    val maxVal2 = compareGreaterNum(c, d)
+    println("the greater number is: $maxVal2")
+
     val obj = "Hello"
     val strResult = processGreeting(obj)
     val strCapitalized = strResult.replaceFirstChar { it.uppercase() }
     println("the string result is: $strCapitalized")
+
+    val obj2 = 5
+    val strResult2 = processGreeting(obj2.toString())
+    val strCapitalized2 = strResult2.replaceFirstChar { it.uppercase() }
+    println("the string result is: $strCapitalized2")
+
+    val trafficLightColor = "YELLOW"
+    printTrafficLightStatus(trafficLightColor)
 } // end processControlFlowExercises()
