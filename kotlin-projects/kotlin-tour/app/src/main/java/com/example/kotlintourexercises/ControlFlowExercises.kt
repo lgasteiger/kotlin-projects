@@ -88,6 +88,14 @@ fun processGreeting(strArg: String): String {
     return strReturn
 } // end processGreeting()
 
+/**
+ * prints the traffic light status
+ *
+ * @param color the color of the traffic light
+ * @return none
+ * @throws none
+ * @see none
+ */
 fun printTrafficLightStatus(color: String) {
     println("*****executing printTrafficLightStatus()*****")
 
@@ -102,6 +110,60 @@ fun printTrafficLightStatus(color: String) {
     val colorLowercaseCapitalized = colorLowercase.replaceFirstChar { it.uppercase() }
     println("the traffic light is '$colorLowercaseCapitalized' and the action is '$trafficAction'")
 } // end printTrafficLightStatus(color: String)
+
+fun compareNumVals(value1: Number, value2: Number): Boolean {
+    println("*****executing compareNumVals()*****")
+
+    return value1.toDouble() == value2.toDouble()
+} // end compareNumVals(value1: Number, value2: Number)
+
+/**
+ * this function represents the first exercise of the conditional expressions practice
+ * moreover, two dice are rolled and a winner is determined
+ *
+ * @param dice1 the first dice
+ * @param dice2 the second dice
+ * @returns the result of the roll
+ * @throws none
+ * @see none
+ */
+fun <T> rollDice(dice1: T, dice2: T): String {
+    println("*****executing rollDice()*****")
+
+    /* TODO: need to implement data type checking prior to equivalence comparison */
+
+    try {
+        if (dice1 === dice2) {
+            return "You win :)"
+        } else {
+            return "You lose :("
+        } // end if...else
+    } catch (e: ClassCastException) {
+        return "You must roll dice of the same type: ${e.message}"
+    } catch (e: Exception) {
+        return "comparison error: ${e.message}"
+    } // end try...catch
+} // end rollDice(dice1: Number, dice2: T)
+
+fun runCondExprPrac() {
+    println("*****executing runCondExprPrac()*****")
+
+    val dice1 = 1
+    val dice2 = 2
+    val result = rollDice(dice1, dice2)
+    println(result)
+
+    val dice3 = "hiya"
+    val dice4 = "hiya"
+    val result2 = rollDice(dice3, dice4)
+    println(result2)
+
+    /* fails data type equivalence check */
+    // val dice5 = 1
+    // val dice6 = "hiya"
+    // val result3 = rollDice(dice5, dice6)
+    // println(result3)
+} // end runCondExprPrac()
 
 /**
  * this is the driver for the control flow exercises from the brilliant kotlin documentation
@@ -145,4 +207,9 @@ fun processControlFlowExercises() {
 
     val trafficLightColor = "YELLOW"
     printTrafficLightStatus(trafficLightColor)
+
+    val trafficLightColor2 = "Red"
+    printTrafficLightStatus(trafficLightColor2)
+
+    runCondExprPrac()
 } // end processControlFlowExercises()
