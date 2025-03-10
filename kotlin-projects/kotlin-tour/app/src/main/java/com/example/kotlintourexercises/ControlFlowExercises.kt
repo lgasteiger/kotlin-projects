@@ -1,5 +1,7 @@
 package com.example.kotlintourexercises
 
+import kotlin.random.Random
+
 /**
  * returns 1 if boolVal is true, otherwise returns 2
  *
@@ -145,24 +147,53 @@ fun <T> rollDice(dice1: T, dice2: T): String {
     } // end try...catch
 } // end rollDice(dice1: Number, dice2: T)
 
+fun getButtonAction(strButton: String): String {
+    println("*****executing getButtonAction()*****")
+    val strAction = when (strButton) {
+        "A" -> "Yes"
+        "B" -> "No"
+        "X" -> "Menu"
+        "Y" -> "Nothing"
+        else -> "There is no such button"
+    } // end when (strButton)
+
+    return strAction
+} // end getButtonAction(strButton: String): String
+
+fun isContinue(): Boolean {
+    println("*****executing isContinue()*****")
+    println("do you want to continue? (y/n)")
+    val strContinue = readln().trim().lowercase()
+    if (strContinue == "n" || strContinue == "N") {
+        return false
+    } // end if (strContinue != "y")
+    return strContinue.lowercase() == "y"
+} // end isContinue(strContinue: String): Boolean
+
+fun runExercise2() {
+    println("-----conditional expression practice, exercise 2-----")
+    var continueExecution = true
+    while (continueExecution) {
+        println("please enter a button:")
+        val strButton = readln().trim().uppercase()
+        val strAction = getButtonAction(strButton)
+        println("the action for button '$strButton' is '$strAction'")
+        continueExecution = isContinue()
+    } // end while (continueExecution)
+} // end runExercise2()
+
 fun runCondExprPrac() {
     println("*****executing runCondExprPrac()*****")
 
-    val dice1 = 1
-    val dice2 = 2
+    println("conditional expression practice, exercise 1")
+    val dice1 = Random.nextInt(6)
+    val dice2 = Random.nextInt(6)
     val result = rollDice(dice1, dice2)
+    println("dice1: $dice1, dice2: $dice2")
     println(result)
 
-    val dice3 = "hiya"
-    val dice4 = "hiya"
-    val result2 = rollDice(dice3, dice4)
-    println(result2)
 
-    /* fails data type equivalence check */
-    // val dice5 = 1
-    // val dice6 = "hiya"
-    // val result3 = rollDice(dice5, dice6)
-    // println(result3)
+
 } // end runCondExprPrac()
 
 /**
