@@ -147,6 +147,14 @@ fun <T> rollDice(dice1: T, dice2: T): String {
     } // end try...catch
 } // end rollDice(dice1: Number, dice2: T)
 
+/**
+ * this function returns the action for a given button
+ *
+ * @param strButton the button to check
+ * @return the action for the button
+ * @throws none
+ * @see none
+ */
 fun getButtonAction(strButton: String): String {
     println("*****executing getButtonAction()*****")
     val strAction = when (strButton) {
@@ -160,6 +168,14 @@ fun getButtonAction(strButton: String): String {
     return strAction
 } // end getButtonAction(strButton: String): String
 
+/**
+ * this function prompts the user to continue or not
+ *
+ * @param none
+ * @return true if the user wants to continue, false otherwise
+ * @throws none
+ * @see none
+ */
 fun isContinue(): Boolean {
     println("*****executing isContinue()*****")
     println("do you want to continue? (y/n)")
@@ -170,6 +186,28 @@ fun isContinue(): Boolean {
     return strContinue.lowercase() == "y"
 } // end isContinue(strContinue: String): Boolean
 
+fun runExercise1() {
+    println("-----conditional expression practice, exercise 1-----")
+    var continueExecution = true
+    while (continueExecution) {
+        val dice1 = Random.nextInt(6)
+        val dice2 = Random.nextInt(6)
+        val result = rollDice(dice1, dice2)
+        println("dice1: $dice1, dice2: $dice2")
+        println(result)
+        continueExecution = isContinue()
+    } // end while (continueExecution)
+} // end runExercise1()
+
+/**
+ * this function represents the second exercise of the conditional expressions practice.
+ * it prompts the user to enter a button and returns the action for that button
+ *
+ * @param none
+ * @return none
+ * @throws none
+ * @see none
+ */
 fun runExercise2() {
     println("-----conditional expression practice, exercise 2-----")
     var continueExecution = true
@@ -184,16 +222,8 @@ fun runExercise2() {
 
 fun runCondExprPrac() {
     println("*****executing runCondExprPrac()*****")
-
-    println("conditional expression practice, exercise 1")
-    val dice1 = Random.nextInt(6)
-    val dice2 = Random.nextInt(6)
-    val result = rollDice(dice1, dice2)
-    println("dice1: $dice1, dice2: $dice2")
-    println(result)
-
-
-
+    runExercise1()
+    runExercise2()
 } // end runCondExprPrac()
 
 /**
