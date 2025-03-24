@@ -220,11 +220,103 @@ fun runExercise2() {
     } // end while (continueExecution)
 } // end runExercise2()
 
+/**
+ * this function runs the conditional expressions practice exercises 1 and 2
+ *
+ * @param none
+ * @return none
+ * @throws none
+ * @see none
+ */
 fun runCondExprPrac() {
     println("*****executing runCondExprPrac()*****")
     runExercise1()
     runExercise2()
 } // end runCondExprPrac()
+
+/**
+ * this function creates a range of values from start to end inclusive
+ *
+ * @param start the start value
+ * @param end the end value
+ * @return a range of values from start to end inclusive
+ * @throws IllegalArgumentException
+ * @see none
+
+fun <T> createRange(start: T, end: T, stepVal: Int = 1, inclusive: Boolean = true,
+                    reverse: Boolean = false): ClosedRange<T> where T : Comparable<T> {
+    println("*****executing createRange(start: T, end: T)*****")
+    if (start > end) {
+        throw IllegalArgumentException("start value must be less than or equal to end value")
+    } // end if (start > end)
+
+    if (stepVal <= 0) {
+        throw IllegalArgumentException("step value must be greater than 0")
+    } // end if (step <= 0)
+
+    if (stepVal > 1) {
+        return start..end
+    } // end if (step > 1)
+
+    return start..end
+} // end createRange(start: T, end: T): ClosedRange<T> where T : Comparable<T>
+*/
+
+/**
+ * this function tests the range use cases
+ *
+ * @param none
+ * @return none
+ * @throws none
+ * @see none
+ */
+fun testRangeForLoops() {
+    println("*****executing testRangeForLoops()*****")
+    println("-----print ascending numbers inclusive-----")
+    for (number in 1..5) {
+        println("number = $number")
+    } // end for
+
+    println("-----print ascending numbers non-inclusive-----")
+    for (number in 1..5) {
+        println("number = $number")
+    } // end for
+
+    println("-----print descending numbers inclusive-----")
+    for (number in 5 downTo 1) {
+        println("number = $number")
+    } // end for
+
+    println("-----print ascending number non-inclusive with step 2-----")
+    for (number in 1..<5 step 2) {
+        println("number = $number")
+    } // end for
+
+    println("-----print ascending chars inclusive-----")
+    for (character in 'a'..'g') {
+        println("character = $character")
+    } // end for
+
+    println("-----print descending chars inclusive with step 2")
+    for (character in 'g' downTo 'a' step 2) {
+        println("character = $character")
+    } // end for
+} // end testRangeForLoops()
+
+fun printCakeStatus(cakesEaten: Int, cakesBaked: Int, cakesMax: Int) {
+    println("*****executing cakeStatus()*****")
+    var cakesEatenInc = cakesEaten
+    var cakesBakedInc = cakesBaked
+
+    while (cakesEatenInc < cakesMax) {
+        println("please eat a cake")
+        cakesEatenInc++
+    } // end while
+    do {
+        println("please bake a cake")
+        cakesBakedInc++
+    } while (cakesBakedInc < cakesEatenInc)
+} // end printCakeStatus()
 
 /**
  * this is the driver for the control flow exercises from the brilliant kotlin documentation
@@ -237,7 +329,7 @@ fun runCondExprPrac() {
  */
 fun processControlFlowExercises() {
     println("*****executing processControlFlowExercises()*****")
-
+/*
     val bVal = true
     val resultVal = checkStatus(bVal)
     println("the first return value result is: $resultVal")
@@ -273,4 +365,7 @@ fun processControlFlowExercises() {
     printTrafficLightStatus(trafficLightColor2)
 
     runCondExprPrac()
+*/
+    testRangeForLoops()
+    printCakeStatus(0, 0, 3)
 } // end processControlFlowExercises()
