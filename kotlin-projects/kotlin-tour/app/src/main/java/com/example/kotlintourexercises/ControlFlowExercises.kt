@@ -318,6 +318,40 @@ fun printCakeStatus(cakesEaten: Int, cakesBaked: Int, cakesMax: Int) {
     } while (cakesBakedInc < cakesEatenInc)
 } // end printCakeStatus()
 
+fun whilePizzaSlicesImpl(maxPizzaSlices: Int) {
+    println("-----whilePizzaSlicesImpl()-----")
+    var pizzaSlices = 0
+    while (pizzaSlices < maxPizzaSlices) {
+        pizzaSlices++
+        println("There's only $pizzaSlices slice/s of pizza:")
+    } // end while
+
+    println("There are $pizzaSlices slices of pizza. Hooray! We have a whole pizza! :D")
+} // end whilePizzaSlicesImpl()
+
+fun doWhilePizzaSlicesImpl(maxPizzaSlices: Int) {
+    println("-----doWhilePizzaSlicesImpl()-----")
+    var pizzaSlices = 0
+    do {
+        pizzaSlices++
+        println("There's only $pizzaSlices slice/s of pizza:")
+    } while (pizzaSlices < maxPizzaSlices) // end do...while
+
+    println("There are $pizzaSlices slices of pizza. Hooray! We have a whole pizza! :D")
+} // end doWhilePizzaSlicesImpl()
+
+fun loopExercise1(maxPizzaSlices: Int) {
+    println("*****executing countPizzaSlices()*****")
+    whilePizzaSlicesImpl(maxPizzaSlices)
+    doWhilePizzaSlicesImpl(maxPizzaSlices)
+} // end loopExercise1()
+
+fun loopsExercises() {
+    println("*****executing loopsExercises()*****")
+    val totPizzaSlices = 8
+    loopExercise1(totPizzaSlices)
+} // end loopsExercises()
+
 /**
  * this is the driver for the control flow exercises from the brilliant kotlin documentation
  * "kotlin tour" tutorial
@@ -368,4 +402,5 @@ fun processControlFlowExercises() {
 */
     testRangeForLoops()
     printCakeStatus(0, 0, 3)
+    loopsExercises()
 } // end processControlFlowExercises()
