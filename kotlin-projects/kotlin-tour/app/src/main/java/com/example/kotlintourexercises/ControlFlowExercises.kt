@@ -346,10 +346,29 @@ fun loopExercise1(maxPizzaSlices: Int) {
     doWhilePizzaSlicesImpl(maxPizzaSlices)
 } // end loopExercise1()
 
+fun loopExercise2(loopStart: Int, loopEnd: Int ) {
+    println("*****executing loopExercise2()*****")
+    for (num in loopStart..loopEnd) {
+        if (num % 3 == 0 && num % 5 == 0) {
+            println("fizzbuzz")
+        } else if (num % 3 == 0) {
+            println("fizz")
+        } else if (num % 5 == 0) {
+            println("buzz")
+        } else {
+            println(num)
+        } // end if
+    } // end for
+} // end loopExercise2()
+
 fun loopsExercises() {
     println("*****executing loopsExercises()*****")
     val totPizzaSlices = 8
     loopExercise1(totPizzaSlices)
+
+    val myStart = 1
+    val myEnd = 20
+    loopExercise2(myStart, myEnd)
 } // end loopsExercises()
 
 /**
