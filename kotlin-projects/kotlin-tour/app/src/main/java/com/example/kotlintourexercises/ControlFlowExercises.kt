@@ -113,9 +113,17 @@ fun printTrafficLightStatus(color: String) {
     println("the traffic light is '$colorLowercaseCapitalized' and the action is '$trafficAction'")
 } // end printTrafficLightStatus(color: String)
 
+/**
+ * this function return true if value1 == value2. otherwise, return false
+ *
+ * @param value1 the first value
+ * @param value2 the second value
+ * @return true if value1 == value2. otherwise, return false
+ * @throws none
+ * @see none
+ */
 fun compareNumVals(value1: Number, value2: Number): Boolean {
     println("*****executing compareNumVals()*****")
-
     return value1.toDouble() == value2.toDouble()
 } // end compareNumVals(value1: Number, value2: Number)
 
@@ -186,6 +194,15 @@ fun isContinue(): Boolean {
     return strContinue.lowercase() == "y"
 } // end isContinue(strContinue: String): Boolean
 
+/**
+ * this function represents the first exercise of the conditional expressions practice.
+ * it prints to the console the result of rolling two dice
+ *
+ * @param none
+ * @return none
+ * @throws none
+ * @see none
+ */
 fun runExercise1() {
     println("-----conditional expression practice, exercise 1-----")
     var continueExecution = true
@@ -303,6 +320,16 @@ fun testRangeForLoops() {
     } // end for
 } // end testRangeForLoops()
 
+/**
+ * this function prints the status of the cake that were recently created
+ *
+ * @param cakesEaten the number of cakes eaten
+ * @param cakesBaked the number of cakes baked
+ * @param cakesMax the maximum number of cakes
+ * @return none
+ * @throws none
+ * @see none
+ */
 fun printCakeStatus(cakesEaten: Int, cakesBaked: Int, cakesMax: Int) {
     println("*****executing cakeStatus()*****")
     var cakesEatenInc = cakesEaten
@@ -340,12 +367,32 @@ fun doWhilePizzaSlicesImpl(maxPizzaSlices: Int) {
     println("There are $pizzaSlices slices of pizza. Hooray! We have a whole pizza! :D")
 } // end doWhilePizzaSlicesImpl()
 
+/**
+ * this function is the first loop exercise from the brilliant kotlin documentation.
+ * it will print out the pizza slices until the maximum number of slices is reached. it will
+ * implement the "while" and "do...while" loops
+ *
+ * @param maxPizzaSlices the maximum number of pizza slices
+ * @return none
+ * @throws none
+ * @see none
+ */
 fun loopExercise1(maxPizzaSlices: Int) {
     println("*****executing countPizzaSlices()*****")
     whilePizzaSlicesImpl(maxPizzaSlices)
     doWhilePizzaSlicesImpl(maxPizzaSlices)
 } // end loopExercise1()
 
+/**
+ * this function is the second loop exercise from the brilliant kotlin documentation. it will
+ * implement the "Fizzbuzz" game
+ *
+ * @param loopStart the start value for the loop
+ * @param loopEnd the end value for the loop
+ * @return none
+ * @throws none
+ * @see none
+ */
 fun loopExercise2(loopStart: Int, loopEnd: Int ) {
     println("*****executing loopExercise2()*****")
     for (num in loopStart..loopEnd) {
@@ -361,14 +408,47 @@ fun loopExercise2(loopStart: Int, loopEnd: Int ) {
     } // end for
 } // end loopExercise2()
 
+/**
+ * this function is the third loop exercise from the brilliant kotlin documentation. it will
+ * print out the words that start with the letter 'l' only
+ *
+ * @param wordsList the list of words
+ * @return none
+ * @throws none
+ * @see none
+ */
+fun loopExercise3(wordsList: List<String>) {
+    println("*****executing loopExercise3()*****")
+
+    var numCount = 1
+    for (word in wordsList) {
+        val firstLetter = word.firstOrNull() ?: '\u0000'
+        if (firstLetter == 'l' || firstLetter == 'L') {
+            println("$numCount. '$word' starts with the letter 'l'")
+            numCount++
+        } // end if
+    } // end for
+} // end loopExercise3()
+
+/**
+ * this function is the driver for the loops exercises from the brilliant kotlin documentation
+ *
+ * @param none
+ * @return none
+ * @throws none
+ * @see none
+ */
 fun loopsExercises() {
     println("*****executing loopsExercises()*****")
     val totPizzaSlices = 8
     loopExercise1(totPizzaSlices)
 
     val myStart = 1
-    val myEnd = 20
+    val myEnd = 100
     loopExercise2(myStart, myEnd)
+
+    val myWords = listOf("dinosaur", "limousine", "magazine", "Language")
+    loopExercise3(myWords)
 } // end loopsExercises()
 
 /**
@@ -418,8 +498,9 @@ fun processControlFlowExercises() {
     printTrafficLightStatus(trafficLightColor2)
 
     runCondExprPrac()
-*/
+
     testRangeForLoops()
     printCakeStatus(0, 0, 3)
+*/
     loopsExercises()
 } // end processControlFlowExercises()
