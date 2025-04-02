@@ -16,5 +16,7 @@ fun main() {
     // collectionsAssign2()
     // collectionsAssign3()
 
-    processControlFlowExercises()
+    // processControlFlowExercises()
+
+    launchNamedArgsExer()
 } // end main()
