@@ -18,5 +18,7 @@ fun main() {
 
     // processControlFlowExercises()
 
-    launchNamedArgsExer()
+    // printNamedArgsPrac()
+    // printDefaultParamValsPrac()
+    processRegInfo()
 } // end main()
