@@ -20,5 +20,8 @@ fun main() {
 
     // printNamedArgsPrac()
     // printDefaultParamValsPrac()
-    processRegInfo()
+    // processRegInfo()
+    functionsExercise1()
+    functionsExercise2()
+    functionsExercise3()
 } // end main()
