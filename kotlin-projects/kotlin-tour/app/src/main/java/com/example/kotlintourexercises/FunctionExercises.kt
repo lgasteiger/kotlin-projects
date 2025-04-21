@@ -225,3 +225,16 @@ fun functionsExercise3() {
     val test5 = intervalInSeconds(24, 0, 0)
     println("the interval in seconds for 24 hours is: ${formatter.format(test5)} seconds")
 } // end functionsExercise3()
+
+fun upperCaseString(str: String): String {
+    println("*****executing upperCaseString()*****")
+    return str.uppercase()
+} // end upperCaseString()
+
+fun lambdaExprExercises() {
+    println("*****executing lambdaExprExercises()*****")
+    println(upperCaseString("hello world!"))
+
+    val allLowercaseString = { text: String -> text.lowercase() }
+    println(allLowercaseString("HeLLO wORLD!"))
+} // end lambdaExprExercises()
