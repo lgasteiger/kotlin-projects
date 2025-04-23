@@ -231,10 +231,24 @@ fun upperCaseString(str: String): String {
     return str.uppercase()
 } // end upperCaseString()
 
+fun passToAnotherFunc() {
+    println("*****executing passToAnotherFunc() lambda expression example*****")
+    val numbers = listOf(1, -2, 3, -4, 5, -6)
+    val positives = numbers.filter ({ x -> x > 0 })
+
+    val isNegative = { x: Int -> x < 0 }
+    val negatives = numbers.filter(isNegative)
+
+    println("positives: $positives")
+    println("negatives: $negatives")
+} // end passToAnotherFunc()
+
 fun lambdaExprExercises() {
     println("*****executing lambdaExprExercises()*****")
-    println(upperCaseString("hello world!"))
+    println(upperCaseString("hello world! using normal function syntax"))
 
     val allLowercaseString = { text: String -> text.lowercase() }
-    println(allLowercaseString("HeLLO wORLD!"))
+    println(allLowercaseString("HeLLO wORLD! using lambda expression syntax"))
+
+    passToAnotherFunc()
 } // end lambdaExprExercises()
