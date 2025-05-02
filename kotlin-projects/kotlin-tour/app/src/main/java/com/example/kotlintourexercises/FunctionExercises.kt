@@ -231,17 +231,23 @@ fun upperCaseString(str: String): String {
     return str.uppercase()
 } // end upperCaseString()
 
-fun passToAnotherFunc() {
+fun passToAnotherFunc(myOriginalList: List<Int>) {
     println("*****executing passToAnotherFunc() lambda expression example*****")
-    val numbers = listOf(1, -2, 3, -4, 5, -6)
-    val positives = numbers.filter ({ x -> x > 0 })
-
+    val positives = myOriginalList.filter ({ x -> x > 0 })
     val isNegative = { x: Int -> x < 0 }
-    val negatives = numbers.filter(isNegative)
+    val negatives = myOriginalList.filter(isNegative)
 
     println("positives: $positives")
     println("negatives: $negatives")
 } // end passToAnotherFunc()
+
+fun transformItems(myOriginalList: List<Int>) {
+     println("*****executing transformItems()*****")
+     val doubledNums = myOriginalList.map { x -> x * 2 }
+     val tripledNums = myOriginalList.map { x -> x * 3 }
+     println("doubled numbers: $doubledNums")
+     println("tripled numbers: $tripledNums")
+} // end transformItems()
 
 fun lambdaExprExercises() {
     println("*****executing lambdaExprExercises()*****")
@@ -250,5 +256,7 @@ fun lambdaExprExercises() {
     val allLowercaseString = { text: String -> text.lowercase() }
     println(allLowercaseString("HeLLO wORLD! using lambda expression syntax"))
 
-    passToAnotherFunc()
+    val myNumsList = listOf(1, -2, 3, -4, 5, -6)
+    passToAnotherFunc(myNumsList)
+    transformItems(myNumsList)
 } // end lambdaExprExercises()
