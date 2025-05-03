@@ -249,6 +249,12 @@ fun transformItems(myOriginalList: List<Int>) {
      println("tripled numbers: $tripledNums")
 } // end transformItems()
 
+fun strFuncTypeExercise(myStr: String) {
+    println("*****executing strFuncTypeExercise()*****")
+    val upperCaseString: (String) -> String = { text -> text.uppercase() }
+    println(upperCaseString(myStr))
+} // end strFuncTypeExercise()
+
 fun lambdaExprExercises() {
     println("*****executing lambdaExprExercises()*****")
     println(upperCaseString("hello world! using normal function syntax"))
@@ -259,4 +265,7 @@ fun lambdaExprExercises() {
     val myNumsList = listOf(1, -2, 3, -4, 5, -6)
     passToAnotherFunc(myNumsList)
     transformItems(myNumsList)
+
+    val myTestStr = "this is going TO bE a GREAT Competition"
+    strFuncTypeExercise(myTestStr)
 } // end lambdaExprExercises()
