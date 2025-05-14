@@ -255,6 +255,23 @@ fun strFuncTypeExercise(myStr: String) {
     println(upperCaseString(myStr))
 } // end strFuncTypeExercise()
 
+fun toSeconds(time: String): (Int) -> Int = when (time) {
+    "hours" -> { value: Int -> value * 60 * 60 }
+    "minutes" -> { value: Int -> value * 60 }
+    "seconds" -> { value: Int -> value }
+    else -> { value: Int -> value }
+} // end toSeconds()
+
+fun lambdaExprReturnExercise() {
+    println("*****executing lambdaExprReturnExercise()*****")
+    val timeInMinutes = listOf(2, 10, 15, 1)
+    val min2sec = toSeconds("minutes")
+    //println("min2sec: $min2sec")
+
+    val totalTimeInSeconds = timeInMinutes.map(min2sec).sum()
+    println("total time in seconds: $totalTimeInSeconds")
+} // end lambdaExprReturnExercise()
+
 fun lambdaExprExercises() {
     println("*****executing lambdaExprExercises()*****")
     println(upperCaseString("hello world! using normal function syntax"))
@@ -268,4 +285,6 @@ fun lambdaExprExercises() {
 
     val myTestStr = "this is going TO bE a GREAT Competition"
     strFuncTypeExercise(myTestStr)
+
+    lambdaExprReturnExercise()
 } // end lambdaExprExercises()
