@@ -272,6 +272,13 @@ fun lambdaExprReturnExercise() {
     println("total time in seconds: $totalTimeInSeconds")
 } // end lambdaExprReturnExercise()
 
+fun trailingLambdaExercises() {
+    println("*****executing trailingLambdaExercises()*****")
+    val myNumsList = listOf(1, 2, 3)
+    val myTotal = myNumsList.fold(0) { x, item -> x + item }
+    println("total: $myTotal")
+} // end trailingLambdaExercises()
+
 fun lambdaExprExercises() {
     println("*****executing lambdaExprExercises()*****")
     println(upperCaseString("hello world! using normal function syntax"))
@@ -287,4 +294,6 @@ fun lambdaExprExercises() {
     strFuncTypeExercise(myTestStr)
 
     lambdaExprReturnExercise()
+
+    trailingLambdaExercises()
 } // end lambdaExprExercises()
