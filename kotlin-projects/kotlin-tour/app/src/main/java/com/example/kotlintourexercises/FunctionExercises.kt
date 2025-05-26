@@ -277,6 +277,10 @@ fun trailingLambdaExercises() {
     val myNumsList = listOf(1, 2, 3)
     val myTotal = myNumsList.fold(0) { x, item -> x + item }
     println("total: $myTotal")
+
+    val myTestList = listOf(4, 5, 6)
+    val myTotal2 = myTestList.fold(0, { x, item -> x + item })
+    println("total2: $myTotal2")
 } // end trailingLambdaExercises()
 
 fun lambdaExprExercises() {
