@@ -283,6 +283,25 @@ fun trailingLambdaExercises() {
     println("total2: $myTotal2")
 } // end trailingLambdaExercises()
 
+fun printUrls(bookInfoUrls: List<String>) {
+    println("*****executing printUrls()*****")
+    bookInfoUrls.forEach { url -> println(url) }
+} // end printUrls()
+
+fun createUrls() {
+    println("*****executing createUrls()*****")
+    println("*****executing lambdaExprAssignment1()*****")
+    val actions = listOf("title", "year", "author")
+    val prefix = "https://example.com/book-info"
+    val id = 5
+    val urls = actions.map { action -> "$prefix/$id/$action/"}
+    printUrls(urls)
+} // end createUrls()
+
+fun lambdaExprAssignments() {
+    createUrls()
+} // end lambdaExprAssignment1()
+
 fun lambdaExprExercises() {
     println("*****executing lambdaExprExercises()*****")
     println(upperCaseString("hello world! using normal function syntax"))
@@ -300,4 +319,6 @@ fun lambdaExprExercises() {
     lambdaExprReturnExercise()
 
     trailingLambdaExercises()
+
+    lambdaExprAssignments()
 } // end lambdaExprExercises()
